@@ -189,13 +189,10 @@ function d3Tree(treeData) {
             })
             .on('click', click);
 
-		nodeEnter.append("rect")
+		nodeEnter.append("circle")
 			.attr('class', 'nodeRect')
 			// Size of the rectangle/2
-			.attr("x", function(d){return -(d.name.length*5+10)/2})
-			.attr("y", -10)
-			.attr("width", 0)
-			.attr("height", 0)
+			.attr("r", function(d){return -(d.name.length*5+10)/2})
 			.style("fill", function(d) {
 			    return d._children ? "lightsteelblue" : "#fff";
 		});
@@ -215,19 +212,51 @@ function d3Tree(treeData) {
             .attr("y", 0)
             .attr("text-anchor", "middle")
             .text(function(d) {
-                return d.name;
+                if(d.name == 0){
+					return "--";
+				}
+				else if(d.name == 1){
+					return "-";
+				}
+				else if(d.name == 2){
+					return "0";
+				}
+				else if(d.name == 3){
+					return "+";
+				}
+				else if(d.name == 4){
+					return "++";
+				}
+				else{
+					return d.name;
+				}
             });
 
-        node.select("rect.nodeRect")
-            .attr("width", function(d) {
+        node.select("circle.nodeRect")
+            .attr("r", function(d) {
 				// Adjust the size of the square according to the label
                 return d.children || d._children ? d.name.length*5+10 : 0;
             })
-            .attr("height", function(d) {
-                return d.children || d._children ? 20 : 0;
-            })
+			.style("stroke", "black")
             .style("fill", function(d) {
-                return d._children ? "lightsteelblue" : "#fff";
+				if(d.name == 0){
+					return "#B40404";
+				}
+				else if(d.name == 1){
+					return "#FA5858";
+				}
+				else if(d.name == 2){
+					return "#FFFFFF";
+				}
+				else if(d.name == 3){
+					return "#A9BCF5";
+				}
+				else if(d.name == 4){
+					return "#0431B4";
+				}
+				else{
+					return "#FFFFFF";
+				}
             });
 
         // Transition nodes to their new position.

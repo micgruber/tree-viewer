@@ -3,11 +3,11 @@
 }
 
 .overlay {
-	background-color: #eed;
+	background-color: #ffffff;
 }
    
 .node rect {
-	fill: #fff;
+	fill: #b40404;
 	stroke: darkorange;
 	stroke-width: 1.5px;
 }
